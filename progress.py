@@ -12,8 +12,9 @@ class Progress:
     def __init__(self):
         self.analyzer = StdoutAnalyzer()
         self.percent_complete = 0
-        self.pbar = tqdm(total=100)
-        #self.pbar = tqdm(total=100,ascii=True)
+        # self.pbar = tqdm(total=100)
+        # self.pbar = tqdm(total=100,ascii=" ░▒▓█")
+        self.pbar = tqdm(total=100,ascii="░▓█")
         self.verbose = False
         self.stdout_log = ''
 
@@ -60,10 +61,13 @@ class Progress:
 
 
 if __name__ == '__main__':
+    from time import sleep
     P = Progress()
     P.show_progress(
-        'Duration: 00:00:50.45, start: 0.000000, bitrate: 102374 kb/s')
-
-    LINE = ('frame= 1285 fps= 41 q=27.0 size=    5185kB'
-            ' time=00:00:05.50 bitrate= 824.8kbits/s speed=1.64x')
-    P.show_progress(LINE)
+        'Duration: 00:00:59.00, start: 0.000000, bitrate: 102374 kb/s')
+        
+    for i in range(59):
+        LINE = (f'frame= 1285 fps= 41 q=27.0 size=    5185kB'
+                f' time=00:00:{i}.00 bitrate= 824.8kbits/s speed=1.64x')
+        P.show_progress(LINE)
+        sleep(0.5)
